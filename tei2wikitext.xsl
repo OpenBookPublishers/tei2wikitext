@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
@@ -6,14 +6,21 @@
     version="1.0">
 
 <xsl:output method="html" indent="no" encoding="utf-8"/>
-  <xsl:param name="spaceCharacter">&#160;</xsl:param>
+<xsl:param name="spaceCharacter">&#160;</xsl:param>
 
 <xsl:template match="text()">
   <xsl:copy-of select="."/>
 </xsl:template>
 
 <xsl:template match="tei:TEI">
-  <xsl:apply-templates select="tei:text/*"/>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+    </head>
+    <body>
+      <xsl:apply-templates select="tei:text/*"/>
+    </body>
+  </html>
 </xsl:template>
 
 <xsl:template match="tei:abbr">
@@ -229,6 +236,10 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:for-each>
+</xsl:template>
+
+<xsl:template match="tei:lb">
+  <br />
 </xsl:template>
 
 <xsl:template match="*">
